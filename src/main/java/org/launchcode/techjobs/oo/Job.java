@@ -48,9 +48,9 @@ public class Job {
 
         String dataMissingMessage = "Data not available";
 
-        if (name.isEmpty() && employer.getValue().isEmpty() &&
-            location.getValue().isEmpty() && positionType.getValue().isEmpty() &&
-            coreCompetency.getValue().isEmpty()){
+        if (name == null && employer == null &&
+            location == null && positionType == null &&
+            coreCompetency == null){
             return "OOPS! This job does not seem to exist.";
         }
 

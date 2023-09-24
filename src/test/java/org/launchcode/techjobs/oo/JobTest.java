@@ -44,6 +44,11 @@ public class JobTest {
         assertTrue(testJob.getCoreCompetency() instanceof CoreCompetency);
         assertEquals(testJob.getCoreCompetency().getValue(), "Persistence");
 
+        Job testJob2 = new Job();
+        assertTrue(testJob2.getId() > 0);
+        assertEquals(testJob2.toString(), "OOPS! This job does not seem to exist.");
+
+
 //        assertNotNull(testJob.getName());
 //        assertNotNull(testJob.getEmployer());
 //        assertNotNull(testJob.getLocation());
