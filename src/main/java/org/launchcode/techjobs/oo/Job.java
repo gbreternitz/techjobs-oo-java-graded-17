@@ -45,14 +45,20 @@ public class Job {
 
     @Override
     public String toString() {
-        return "\n Job{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", employer=" + employer +
-                ", location=" + location +
-                ", positionType=" + positionType +
-                ", coreCompetency=" + coreCompetency +
-                "\n";
+
+        String dataMissingMessage = "Data not available";
+
+        //TODO: If Job only contains data for ID field, return "OOPS! This job does not seem to exist."
+
+        String returnMessage = System.lineSeparator() + "ID: " + id +
+                System.lineSeparator() + "Name: " + (name.isEmpty() ? dataMissingMessage : name) +
+                System.lineSeparator() + "Employer: " + ((Objects.equals(employer.getValue(), "")) ? dataMissingMessage : employer) +
+                System.lineSeparator() + "Location: " + ((Objects.equals(location.getValue(), "")) ? dataMissingMessage : location) +
+                System.lineSeparator() + "Position Type: " + ((Objects.equals(positionType.getValue(), "")) ? dataMissingMessage : positionType) +
+                System.lineSeparator() + "Core Competency: " + ((Objects.equals(coreCompetency.getValue(), "")) ? dataMissingMessage : coreCompetency) +
+                System.lineSeparator();
+
+        return  returnMessage;
     }
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID and id.

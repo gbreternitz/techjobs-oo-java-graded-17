@@ -3,6 +3,8 @@ package org.launchcode.techjobs.oo;
 import org.junit.Test;
 import org.testng.annotations.BeforeTest;
 
+import java.util.Objects;
+
 import static org.junit.Assert.*;
 
 public class JobTest {
@@ -78,8 +80,56 @@ public class JobTest {
         Job testJob = new Job("Captain",e,l,pt, cc);
         char[] testJobToStringCharArray = testJob.toString().toCharArray();
 
-        assertEquals(testJobToStringCharArray[0], '\n');
+        assertEquals(testJobToStringCharArray[0], System.lineSeparator().toCharArray()[0]);
+        //Line separator method doesn't work for with the provided tests either, so I did it the easy way here
         assertEquals(testJobToStringCharArray[testJobToStringCharArray.length - 1], '\n');
+
+        //The below should work, but does not; the example provided also does not.
+        //assertEquals(testJobToStringCharArray[testJobToStringCharArray.length - 1], System.lineSeparator().toCharArray()[0]);
+    }
+
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+
+        Job testJob = new Job("Product tester",
+                new Employer("ACME"),
+                new Location("Desert"),
+                new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
+
+        String expectedMessage = System.lineSeparator() + "ID: " + testJob.getId() +
+                System.lineSeparator() + "Name: " + testJob.getName() +
+                System.lineSeparator() + "Employer: " + testJob.getEmployer() +
+                System.lineSeparator() + "Location: " + testJob.getLocation() +
+                System.lineSeparator() + "Position Type: " + testJob.getPositionType() +
+                System.lineSeparator() + "Core Competency: " + testJob.getCoreCompetency() +
+                System.lineSeparator();
+
+        String jobString = testJob.toString();
+        assertEquals(jobString, expectedMessage);
+
+        //this test passes, only problem is the line separator
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+
+        Job testJob = new Job("Product tester",
+                new Employer(""),
+                new Location("Desert"),
+                new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
+
+        String expectedMessage = System.lineSeparator() + "ID: " + testJob.getId() +
+                System.lineSeparator() + "Name: " + testJob.getName() +
+                System.lineSeparator() + "Employer: " + "Data not available" +
+                System.lineSeparator() + "Location: " + testJob.getLocation() +
+                System.lineSeparator() + "Position Type: " + testJob.getPositionType() +
+                System.lineSeparator() + "Core Competency: " + testJob.getCoreCompetency() +
+                System.lineSeparator();
+
+        String jobString = testJob.toString();
+        assertEquals(jobString, expectedMessage);
 
     }
 }
