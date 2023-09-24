@@ -48,7 +48,11 @@ public class Job {
 
         String dataMissingMessage = "Data not available";
 
-        //TODO: If Job only contains data for ID field, return "OOPS! This job does not seem to exist."
+        if (name.isEmpty() && employer.getValue().isEmpty() &&
+            location.getValue().isEmpty() && positionType.getValue().isEmpty() &&
+            coreCompetency.getValue().isEmpty()){
+            return "OOPS! This job does not seem to exist.";
+        }
 
         String returnMessage = System.lineSeparator() + "ID: " + id +
                 System.lineSeparator() + "Name: " + (name.isEmpty() ? dataMissingMessage : name) +
@@ -60,8 +64,6 @@ public class Job {
 
         return  returnMessage;
     }
-
-    // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID and id.
 
     public int getId() {
         return id;
