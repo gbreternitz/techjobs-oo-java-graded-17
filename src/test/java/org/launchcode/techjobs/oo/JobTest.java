@@ -11,34 +11,61 @@ public class JobTest {
     @Test
     public void testSettingJobId() {
 
-        Job testJob = new Job();
-        assertTrue(testJob.getId() > 0);
+        Job testJob1 = new Job();
+        Job testJob2 = new Job();
+
+        assertTrue(testJob1.getId() > 0);
+        assertNotEquals(testJob1.getId(), testJob2.getId());
     }
 
     @Test
     public void testJobConstructorSetsAllFields(){
-        Employer e = new Employer("Flying Dutchman");
-        Location l = new Location("The High Seas");
-        PositionType pt = new PositionType("Manager");
-        CoreCompetency cc = new CoreCompetency("People Person");
 
+        Job testJob = new Job("Product tester",
+                      new Employer("ACME"),
+                      new Location("Desert"),
+                      new PositionType("Quality control"),
+                      new CoreCompetency("Persistence"));
 
-        Job testJob = new Job("Captain",e,l,pt, cc);
-        assertNotNull(testJob.getName());
-        assertNotNull(testJob.getEmployer());
-        assertNotNull(testJob.getLocation());
-        assertNotNull(testJob.getCoreCompetency());
+        assertTrue(testJob.getName() instanceof String);
+        assertEquals(testJob.getName(), "Product tester");
+
+        assertTrue(testJob.getEmployer() instanceof Employer);
+        assertEquals(testJob.getEmployer().getValue(), "ACME");
+
+        assertTrue(testJob.getLocation() instanceof Location);
+        assertEquals(testJob.getLocation().getValue(), "Desert");
+
+        assertTrue(testJob.getPositionType() instanceof PositionType);
+        assertEquals(testJob.getPositionType().getValue(), "Quality control");
+
+        assertTrue(testJob.getCoreCompetency() instanceof CoreCompetency);
+        assertEquals(testJob.getCoreCompetency().getValue(), "Persistence");
+
+//        assertNotNull(testJob.getName());
+//        assertNotNull(testJob.getEmployer());
+//        assertNotNull(testJob.getLocation());
+//        assertNotNull(testJob.getPositionType());
+//        assertNotNull(testJob.getCoreCompetency());
+
     }
 
     @Test
     public void testJobsForEquality() {
 
-        Job testJob1 = new Job();
-        Job testJob1Clone = testJob1;
-        Job testJob2 = new Job();
+        Job testJob1 = new Job("Product tester",
+                new Employer("ACME"),
+                new Location("Desert"),
+                new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
+
+        Job testJob2 = new Job("Product tester",
+                new Employer("ACME"),
+                new Location("Desert"),
+                new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
 
         assertNotEquals(testJob1, testJob2);
-        assertEquals(testJob1, testJob1Clone);
     }
 
     @Test
